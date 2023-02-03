@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, Db } = require('mongodb');
 const PORT = 2020;
+require('dotenv').config()
+
+let db,
+    dbConnectionStr = process.env.DB_STRING,
+    
+    dbName = 'Rapper'
+
 
 const ejs = require('ejs');
 app.use(express.static('public'))
@@ -9,9 +16,9 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-
 // this line of code does a response to from the client to get ejs file 
 app.get('/', (request, respnse) =>{ 
+    
     
     respnse.send(__dirname + '/index.ejs')
 })
