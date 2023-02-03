@@ -4,8 +4,10 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const PORT = 2020;
 
 const ejs = require('ejs');
-
+app.use(express.static('public'))
 app.set('view engine', 'ejs')
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 
 // this line of code does a response to from the client to get ejs file 
