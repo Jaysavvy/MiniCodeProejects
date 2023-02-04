@@ -38,32 +38,43 @@ app.get('/', (request, respnse) =>{
 })
 
 // this line of code does a post from  client to server
-app.post('/addTeamMemeber', (request, respnse) =>{ 
-    db.collection('qoutes').insertOne({stageName: request.body.playerName, birthName: request.body.position, likes: request.body.likes},{
-        $set: {
-            likes:request.body.likes +1
-        },
-    },{
-        sort: {_id: -1},
-        upsert: true
-    })
+app.post('/addTeamMemeber', (request, respnse) =>{
+    db.collection('quotes').insertOne({PlayerName: request.body.playerName,
+    Position: request.body.position, likesS: 0})
     .then(result => {
-        console.log('Added One like')
-        response.json('Like Added')
+        console.log('Team Member Added')
+        response.redirect('/')
     })
     .catch(error => console.error(error))
 })
 
 // this line of code updates the information on the ejs 
-app.put('/', (request, respnse) =>{ 
-    
-    respnse.send(__dirname + '/index.ejs')
+app.put('/addOneLike', (request, respnse) =>{
+    db.collection('quotes').updateOne({PlayerName: request.body.playerName, Position: request.body.position,likes: request.body.likesS},{
+        $set: {
+            likes:request.body.likesS + 1
+          }
+    },{
+        sort: {_id: -1},
+        upsert: true
+    })
+    .then(result => {
+        console.log('Added One Like')
+        response.json('Like Added')
+    })
+    .catch(error => console.error(error))
+
 })
 
 // this line of code deletes code found on the ejs 
-app.delete('/', (request, respnse) =>{ 
-    
-    respnse.send(__dirname + '/index.ejs')
+app.delete('/deletePlayer', (request, respnse) =>{
+    db.collection('quotes').deleteOne({PlayerName: request.body.playerName})
+    .then(result => {
+        console.log('Player Deleted')
+        response.json('Player Deleted')
+    })
+    .catch(error => console.error(error))
+
 })
 
 // this line of code deployes the server 
