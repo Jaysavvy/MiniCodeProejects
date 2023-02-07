@@ -55,7 +55,10 @@ const toggleReminder = (id) => {
   return (
     <div className="container">
       <Header />
-      {tasks.length> 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle ={toggleReminder} /> : ('You Have No Task')}
+      {tasks.length> 0 ? <Tasks tasks={tasks} 
+      onDelete={deleteTask} 
+      onToggle ={toggleReminder} /> : 
+      ('You Have No Task')}
 
     </div>
   
