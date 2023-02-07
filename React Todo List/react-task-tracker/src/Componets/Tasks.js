@@ -1,17 +1,15 @@
+import Task from './Task'
 
 
-
-const Task = ({tasks}) => {
-
-
+const Tasks = ({tasks}) => {
 
   return (
     <>
         {tasks.map((task) => (
-        <h3 key={task.id}>{task.text}</h3>
+        <Task key={task.id} task={task} />
         ))}
     </>
   )
 }
 
-export default Task
+export default Tasks
