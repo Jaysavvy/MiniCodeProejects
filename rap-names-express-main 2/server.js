@@ -68,7 +68,7 @@ app.put('/addOneLike', (request, respnse) =>{
 
 // this line of code deletes code found on the ejs 
 app.delete('/deletePlayer', (request, respnse) =>{
-    db.collection('quotes').deleteOne({PlayerName: request.body.playerName})
+    db.collection('quotes').deleteOne({PlayerName: request.body.playerName, Position: request.body.position})
     .then(result => {
         console.log('Player Deleted')
         response.json('Player Deleted')
